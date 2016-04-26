@@ -4,12 +4,13 @@
     module.directive('nzToggle', ['$timeout', function($timeout) {
         return {
             restrict: 'E',
+            require: 'ngModel',
             replace: true,
             scope: {
                 config: '=?',
                 ngModel: '=',
                 onToggle: '&',
-                ngDisabled: '=',
+                ngDisabled: '='
             },
             template: [
                 '<div class="nz-toggle-wrap" ng-class="getStyle()" ng-style="wrapStyle">',
@@ -31,7 +32,8 @@
                 '   </div>',
                 '</div>',
             ].join(''),
-            link: function(scope, el, attrs) {
+            link: function(scope, el, attrs, ngModelCtrl) {
+                console.log('link')
 
                 // Child Elements
                 var elToggle = angular.element(el[0].querySelector('.nz-toggle-handle'));
